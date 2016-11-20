@@ -22,8 +22,13 @@ if ($method == 'POST') {
     $query->execute(array($loginRequest->username));
     $person = $query->fetchObject(Person::class);
     if ($person != null) {
-        $authToken = new AuthToken($person->id);
-        echo json_encode($authToken);
+        $match = password_verify($loginRequest->password, $person->salt);
+        if ($match) {
+            $authToken = new AuthToken($person->id);
+            echo json_encode($authToken);
+        } else {
+            echo json_encode('false');
+        }
     }
 } else {
     http_response_code(404);

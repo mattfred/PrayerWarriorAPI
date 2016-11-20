@@ -9,18 +9,23 @@
 require 'models/Person.php';
 require 'models/LoginRequest.php';
 require 'database/SqlConnect.php';
+require 'models/AuthToken.php';
 
 $method = $_SERVER['REQUEST_METHOD'];
-$loginRequest = json_decode(file_get_contents('php://input'));
+$personBody = json_decode(file_get_contents('php://input'));
+$person = new Person();
+$person->fromRequestBody($personBody->first, $personBody->last, $personBody->email, $personBody->username, $personBody->password);
 
 if ($method == 'POST') {
     $cxn = new SqlConnect();
     $db = $cxn->getDb();
 
-    $query = $db->prepare("SELECT * FROM Person WHERE username = ?");
-    $query->execute(array($loginRequest->username));
-    $person = $query->fetchObject(Person::class);
-    echo json_encode($person);
+    $query = $db->prepare("INSERT INTO Person VALUES (?, ?, ?, ?, ?, ?)");
+    $success = $query->execute(array($person->id, $person->first, $person->last, $person->email, $person->salt, $person->username));
+    if ($success){
+        $authToken = new AuthToken($person->id);
+        echo json_encode($authToken);
+    }
 } else {
     http_response_code(404);
 }

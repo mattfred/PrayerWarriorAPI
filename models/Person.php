@@ -14,4 +14,21 @@ class Person
     public $username;
     private $password;
     public $email;
+    public $salt;
+
+    public function fromRequestBody($f, $l, $e, $u, $p)
+    {
+        $this->id = uniqid();
+        $this->first = $f;
+        $this->last = $l;
+        $this->username = $u;
+        $this->password = $p;
+        $this->email = $e;
+        $this->setSalt();
+    }
+
+    public function setSalt()
+    {
+        $this->salt = password_hash($this->password, PASSWORD_BCRYPT);
+    }
 }
