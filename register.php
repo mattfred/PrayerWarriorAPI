@@ -20,7 +20,7 @@ if ($method == 'POST') {
     $cxn = new SqlConnect();
     $db = $cxn->getDb();
 
-    $query = $db->prepare("INSERT INTO Person VALUES (?, ?, ?, ?, ?, ?)");
+    $query = $db->prepare("INSERT INTO person VALUES (?, ?, ?, ?, ?, ?)");
     $success = $query->execute(array($person->id, $person->first, $person->last, $person->email, $person->salt, $person->username));
     if ($success){
         $authToken = new AuthToken($person->id);

@@ -18,7 +18,7 @@ if ($method == 'POST') {
     $cxn = new SqlConnect();
     $db = $cxn->getDb();
 
-    $query = $db->prepare("SELECT * FROM Person WHERE username = ?");
+    $query = $db->prepare("SELECT * FROM person WHERE username = ?");
     $query->execute(array($loginRequest->username));
     $person = $query->fetchObject(Person::class);
     if ($person != null) {
