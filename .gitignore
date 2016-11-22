@@ -1,2 +1,4 @@
 .idea/
 prayerWarriorApi.iml
+
+tests/_output/*
