@@ -16,15 +16,17 @@ class Person
     public $email;
     public $salt;
 
-    public function fromRequestBody($f, $l, $e, $u, $p)
+    public function __construct(array $data)
     {
-        $this->id = uniqid();
-        $this->first = $f;
-        $this->last = $l;
-        $this->username = $u;
-        $this->password = $p;
-        $this->email = $e;
-        $this->setSalt();
+        if (isset($data['id'])) {
+            $this->id = $data['id'];
+        }
+
+        $this->first = $data['first'];
+        $this->last = $data['last'];
+        $this->username = $data['username'];
+        $this->salt = $data['salt'];
+        $this->email = $data['email'];
     }
 
     public function setSalt()

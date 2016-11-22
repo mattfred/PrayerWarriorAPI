@@ -6,10 +6,8 @@
  * Time: 1:53 PM
  */
 
-require 'models/Person.php';
-require 'models/LoginRequest.php';
-require 'models/AuthToken.php';
-require 'database/SqlConnect.php';
+use Psr\Http\Message\ServerRequestInterface as Request;
+use Psr\Http\Message\ResponseInterface as Response;
 
 $method = $_SERVER['REQUEST_METHOD'];
 $loginRequest = json_decode(file_get_contents('php://input'));

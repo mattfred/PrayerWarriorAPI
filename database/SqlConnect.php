@@ -4,7 +4,7 @@
  * Class used to create a database connection
  */
 
-require 'config.php';
+require 'dbconfig.php';
 
 class SqlConnect
 {
@@ -41,7 +41,7 @@ class SqlConnect
      * Loads the db configuration properties
      */
     private function loadConfig() {
-        $config = new config();
+        $config = new dbconfig();
         $this->host = $config->host;
         $this->user = $config->user;
         $this->pass = $config->pass;
