@@ -20,13 +20,16 @@ class Person
     {
         if (isset($data['id'])) {
             $this->id = $data['id'];
+        } else {
+            $this->id = uniqid();
         }
 
         $this->first = $data['first'];
         $this->last = $data['last'];
         $this->username = $data['username'];
-        $this->salt = $data['salt'];
+        $this->password = $data['password'];
         $this->email = $data['email'];
+        $this->setSalt();
     }
 
     public function setSalt()
