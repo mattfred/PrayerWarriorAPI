@@ -2,6 +2,7 @@
     "require": {
         "slim/slim": "^3.0",
         "monolog/monolog": "^1.17",
-        "codeception/codeception": "*"
+        "codeception/codeception": "*",
+        "slim/twig-view": "^2.1"
     }
 }

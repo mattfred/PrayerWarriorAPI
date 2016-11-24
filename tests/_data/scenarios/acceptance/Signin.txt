@@ -1,0 +1,9 @@
+I WANT TO LOGIN USER VIA API
+
+I look forward to 'access user data' 
+I have http header 'Content-Type'," 'application/json' 
+I send post '/login'," ['username' => 'tester'," 'password' => 'password10']" 
+I see response code is "\Codeception\Util\HttpCode::OK" 
+I see response is json "" 
+I see response contains '{"person_id":"5833c0d004291"}'
+

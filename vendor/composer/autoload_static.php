@@ -34,6 +34,7 @@ class ComposerStaticIniteaaa1b021e4b4ae20bb300213b8de57a
             'Symfony\\Component\\CssSelector\\' => 30,
             'Symfony\\Component\\Console\\' => 26,
             'Symfony\\Component\\BrowserKit\\' => 29,
+            'Slim\\Views\\' => 11,
             'Slim\\' => 5,
         ),
         'P' => 
@@ -119,6 +120,10 @@ class ComposerStaticIniteaaa1b021e4b4ae20bb300213b8de57a
         array (
             0 => __DIR__ . '/..' . '/symfony/browser-kit',
         ),
+        'Slim\\Views\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/slim/twig-view/src',
+        ),
         'Slim\\' => 
         array (
             0 => __DIR__ . '/..' . '/slim/slim/Slim',
@@ -178,6 +183,13 @@ class ComposerStaticIniteaaa1b021e4b4ae20bb300213b8de57a
     );
 
     public static $prefixesPsr0 = array (
+        'T' => 
+        array (
+            'Twig_' => 
+            array (
+                0 => __DIR__ . '/..' . '/twig/twig/lib',
+            ),
+        ),
         'P' => 
         array (
             'Prophecy\\' => 

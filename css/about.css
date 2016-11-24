@@ -1,0 +1,23 @@
+body {
+    padding-top: 65px;
+}
+
+.image-logo {
+    max-height: 45px;
+}
+
+.navbar-brand {
+    padding-top: 3px;
+}
+
+.thumbnail>img {
+    max-height: 400px;
+}
+
+.padding-top {
+    padding-top: 15px;
+}
+
+.android-green {
+    color: greenyellow;
+}

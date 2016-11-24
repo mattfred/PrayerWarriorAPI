@@ -10,7 +10,27 @@ use \Psr\Http\Message\ResponseInterface as Response;
 
 
 $app->get('/', function ($request, $response) {
-    return 'Prayer Warrior API';
+    return $this->view->render($response, 'index.html');
+});
+
+$app->get('/index', function ($request, $response) {
+    return $this->view->render($response, 'index.html');
+});
+
+$app->get('/about', function ($request, $response) {
+    return $this->view->render($response, 'about.html');
+});
+
+$app->get('/contact', function ($request, $response) {
+    return $this->view->render($response, 'contact.php');
+});
+
+$app->get('/streamit', function ($request, $response) {
+    return $this->view->render($response, 'streamit.html');
+});
+
+$app->get('/dole', function ($request, $response) {
+    return $this->view->render($response, 'dole.html');
 });
 
 $app->post('/register', function (Request $request, Response $response) {
