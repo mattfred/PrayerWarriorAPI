@@ -10,6 +10,7 @@ use \Psr\Http\Message\ResponseInterface as Response;
 
 
 $app->get('/', function ($request, $response) {
+    $this->logger->addInfo("index");
     return $this->view->render($response, 'index.html');
 });
 

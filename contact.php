@@ -70,17 +70,17 @@ if (isset($_POST["submit"])) {
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li><a href="index">Home</a></li>
-                <li><a href="about">About</a></li>
-                <li class="active"><a href="contact">Contact <span class="sr-only">(current)</span></a></li>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li class="active"><a href="contact.php">Contact <span class="sr-only">(current)</span></a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">Mobile Applications<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="streamit">StreamIt</a></li>
-                        <li><a href="dole">Dole</a></li>
+                        <li><a href="streamit.html">StreamIt</a></li>
+                        <li><a href="dole.html">Dole</a></li>
                     </ul>
                 </li>
             </ul>
