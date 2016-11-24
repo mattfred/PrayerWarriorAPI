@@ -10,7 +10,7 @@ require __DIR__.'/../vendor/autoload.php';
 require 'dbconfig.php';
 
 spl_autoload_register(function ($classname) {
-    require ("../models/" . $classname . ".php");
+    require (__DIR__.'../models/' . $classname . '.php');
 });
 
 $db_config = new dbconfig();
