@@ -58,11 +58,12 @@ $app->post('/login', function (Request $request, Response $response) {
         $match = password_verify($loginRequest->password, $person->salt);
         if ($match) {
             $authToken = new AuthToken($person->id);
-            return $response->withStatus(200)->withHeader('Content-Type', 'application/json')->withJson($authToken);
+            return $response->withHeader('Access-Control-Allow-Headers', 'Content-Type')->withStatus(200)->
+            withHeader('Content-Type', 'application/json')->withJson($authToken);
         } else {
-            return $response->withStatus(401);
+            return $response->withHeader('Access-Control-Allow-Headers', 'Content-Type')->withStatus(401);
         }
     } else {
-        return $response->withStatus(404);
+        return $response->withHeader('Access-Control-Allow-Headers', 'Content-Type')->withStatus(404);
     }
 });
