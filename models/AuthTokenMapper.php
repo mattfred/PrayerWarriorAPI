@@ -16,7 +16,7 @@ class AuthTokenMapper extends Mapper
      */
     public function saveAuthToken($authToken) {
         $this->deleteAuthTokenByPersonId($authToken->personId);
-        $query = $this->db->perpare("INSERT INTO token VALUES (?, ?, ?)");
+        $query = $this->db->prepare("INSERT INTO token VALUES (?, ?, ?)");
         $success = $query->execute(array($authToken->id, $authToken->expiration, $authToken->personId));
         return $success;
     }
