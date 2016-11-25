@@ -11,7 +11,7 @@ class AuthToken
     /**
      * @var string token id
      */
-    public $token;
+    public $id;
 
     /**
      * @var datetime expiration time
@@ -29,7 +29,7 @@ class AuthToken
      */
     public function __construct($personId)
     {
-        $this->token = uniqid();
+        $this->id = uniqid();
         $this->personId = $personId;
         $this->setExpiration();
     }
