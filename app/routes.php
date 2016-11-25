@@ -42,6 +42,8 @@ $app->post('/register', function (Request $request, Response $response) {
     $success = $mapper->savePerson($person);
     if ($success) {
         $authToken = new AuthToken($person->id);
+        $mapper = new AuthTokenMapper($this->db);
+        $mapper->saveAuthToken($authToken);
         return $response->withStatus(200)->withHeader('Content-Type', 'application/json')->withJson($authToken);
     } else {
         return $response->withStatus(500);
@@ -58,6 +60,8 @@ $app->post('/login', function (Request $request, Response $response) {
         $match = password_verify($loginRequest->password, $person->salt);
         if ($match) {
             $authToken = new AuthToken($person->id);
+            $mapper = new AuthTokenMapper($this->db);
+            $mapper->saveAuthToken($authToken);
             return $response->withHeader('Access-Control-Allow-Headers', 'Content-Type')->withStatus(200)->
             withHeader('Content-Type', 'application/json')->withJson($authToken);
         } else {
