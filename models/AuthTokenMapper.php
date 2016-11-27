@@ -14,10 +14,11 @@ class AuthTokenMapper extends Mapper
      * @param $authToken AuthToken token to be saved
      * @return mixed boolean
      */
-    public function saveAuthToken($authToken) {
+    public function saveAuthToken($authToken)
+    {
         $this->deleteAuthTokenByPersonId($authToken->personId);
         $query = $this->db->prepare("INSERT INTO token VALUES (?, ?, ?)");
-        $success = $query->execute(array($authToken->id, $authToken->expiration->format('Y/m/d H:i:s'),
+        $success = $query->execute(array($authToken->id, $authToken->expiration->format(Mapper::DATE_FORMAT),
             $authToken->personId));
         return $success;
     }
@@ -25,13 +26,15 @@ class AuthTokenMapper extends Mapper
     /**
      * Get an authToken by token id
      *
-     * @param $tokenId string
+     * @param $id string
      * @return mixed AuthToken
      */
-    public function getAuthToken($tokenId) {
+    public function getAuthToken($id)
+    {
         $query = $this->db->prepare("SELECT * FROM token WHERE id = ?");
-        $query->execute(array($tokenId));
-        $authToken = $query->fetchObject();
+        $query->execute([$id]);
+        $authToken = $query->fetchObject(AuthToken::class);
+        $authToken->expiration = new DateTime($authToken->expiration, new DateTimeZone('UTC'));
         return $authToken;
     }
 
@@ -41,7 +44,8 @@ class AuthTokenMapper extends Mapper
      * @param $personId string person Id
      * @return mixed boolean
      */
-    public function deleteAuthTokenByPersonId($personId) {
+    public function deleteAuthTokenByPersonId($personId)
+    {
         $query = $this->db->prepare("DELETE FROM token WHERE person_id = ?");
         $success = $query->execute(array($personId));
         return $success;

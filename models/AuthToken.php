@@ -21,17 +21,28 @@ class AuthToken
     /**
      * @var string person id
      */
-    public $personId;
+    public $person_id;
 
     /**
      * AuthToken constructor.
      * @param $personId string owner of token
      */
-    public function __construct($personId)
+    public function __construct()
     {
-        $this->id = uniqid();
-        $this->personId = $personId;
+
+    }
+
+    public function init($personId) {
+        $this->setId();
         $this->setExpiration();
+        $this->person_id = $personId;
+    }
+
+    /**
+     * Set a unique id
+     */
+    public function setId() {
+        $this->id = uniqid();
     }
 
     /**
@@ -49,7 +60,7 @@ class AuthToken
      */
     public function isExpired()
     {
-        $now = new DateTime("now");
+        $now = new DateTime('now', new DateTimeZone('UTC'));
         return $this->expiration < $now;
     }
 }

@@ -14,7 +14,7 @@ spl_autoload_register(function ($classname) {
 });
 
 $db_config = new dbconfig();
-$config['displayErrorDetails'] = true;
+$config['displayErrorDetails'] = false;
 $config['db']['host'] = $db_config->host;
 $config['db']['user'] = $db_config->user;
 $config['db']['pass'] = $db_config->pass;

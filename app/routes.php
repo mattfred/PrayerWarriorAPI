@@ -9,6 +9,7 @@ use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 
 
+
 $app->get('/', function ($request, $response) {
     $this->logger->addInfo("index");
     return $this->view->render($response, 'index.html');
@@ -41,7 +42,8 @@ $app->post('/register', function (Request $request, Response $response) {
     $mapper = new PersonMapper($this->db);
     $success = $mapper->savePerson($person);
     if ($success) {
-        $authToken = new AuthToken($person->id);
+        $authToken = new AuthToken();
+        $authToken->init($person->id);
         $mapper = new AuthTokenMapper($this->db);
         $mapper->saveAuthToken($authToken);
         return $response->withStatus(200)->withHeader('Content-Type', 'application/json')->withJson($authToken);
@@ -59,7 +61,8 @@ $app->post('/login', function (Request $request, Response $response) {
     if ($person != null) {
         $match = password_verify($loginRequest->password, $person->salt);
         if ($match) {
-            $authToken = new AuthToken($person->id);
+            $authToken = new AuthToken();
+            $authToken->init($person->id);
             $mapper = new AuthTokenMapper($this->db);
             $mapper->saveAuthToken($authToken);
             return $response->withHeader('Access-Control-Allow-Headers', 'Content-Type')->withStatus(200)->
@@ -70,4 +73,13 @@ $app->post('/login', function (Request $request, Response $response) {
     } else {
         return $response->withHeader('Access-Control-Allow-Headers', 'Content-Type')->withStatus(404);
     }
+});
+
+$app->get('/requests', function (Request $request, Response $response) {
+    $auth = new Auth();
+    $authToken = $auth->authorize($request, $this->db);
+    if ($authToken == null) return $response->withStatus(401);
+    $mapper = new RequestMapper($this->db);
+    return $response->withHeader('Content-Type', 'application/json')
+        ->withJson($mapper->getRequestByPersonId($authToken->person_id));
 });
