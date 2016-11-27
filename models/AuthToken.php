@@ -32,7 +32,8 @@ class AuthToken
 
     }
 
-    public function init($personId) {
+    public function init($personId)
+    {
         $this->setId();
         $this->setExpiration();
         $this->person_id = $personId;
@@ -41,7 +42,8 @@ class AuthToken
     /**
      * Set a unique id
      */
-    public function setId() {
+    public function setId()
+    {
         $this->id = uniqid();
     }
 

@@ -21,7 +21,8 @@ class Auth
         if ($header == null) return null;
         $mapper = new AuthTokenMapper($db);
         $authToken = $mapper->getAuthToken($header);
-        if ($authToken == null || $authToken->isExpired()) return null;
+        if ($authToken == null) return null;
+        if ($authToken->isExpired()) return null;
         return $authToken;
     }
 

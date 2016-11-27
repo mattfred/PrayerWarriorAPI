@@ -33,6 +33,7 @@ class AuthTokenMapper extends Mapper
     {
         $query = $this->db->prepare("SELECT * FROM token WHERE id = ?");
         $query->execute([$id]);
+        if ($query->rowcount() < 1) return null;
         $authToken = $query->fetchObject(AuthToken::class);
         $authToken->expiration = new DateTime($authToken->expiration, new DateTimeZone('UTC'));
         return $authToken;
