@@ -19,7 +19,7 @@ class AuthTokenMapper extends Mapper
         $this->deleteAuthTokenByPersonId($authToken->personId);
         $query = $this->db->prepare("INSERT INTO token VALUES (?, ?, ?)");
         $success = $query->execute(array($authToken->id, $authToken->expiration->format(Mapper::DATE_FORMAT),
-            $authToken->personId));
+            $authToken->person_id));
         return $success;
     }
 
