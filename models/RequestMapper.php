@@ -9,7 +9,7 @@
 class RequestMapper extends Mapper
 {
     public function getRequestByPersonId($personId) {
-        $query = $this->db->prepare("SELECT * FROM request WHERE person_id = ? AND deleted = FALSE AND answered = FALSE");
+        $query = $this->db->prepare("SELECT * FROM request WHERE person_id = ? AND isDeleted = FALSE AND isAnswered = FALSE");
         $query->execute(array($personId));
         $results = $query->fetchAll();
         return $results;
@@ -18,7 +18,7 @@ class RequestMapper extends Mapper
     public function saveRequest($request) {
         $query = $this->db->prepare("INSERT INTO request VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
         $success = $query->execute(array($request->id, $request->title, $request->details, $request->priority,
-            $request->personId, $request->public, $request->isAnswered, $request->isDeleted,
+            $request->personId, $request->isPublic, $request->isAnswered, $request->isDeleted,
             $request->createdOn->format(Mapper::DATE_FORMAT)));
         return $success;
     }

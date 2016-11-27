@@ -43,22 +43,22 @@ class Request
     /**
      * @var bool is request public
      */
-    public $public;
+    public $isPublic;
 
     /**
      * @var bool is request deleted
      */
-    public $deleted;
+    public $isDeleted;
 
     /**
      * @var bool is request answered
      */
-    public $answered;
+    public $isAnswered;
 
     /**
      * @var DateTime date time request was created
      */
-    public $created_on;
+    public $createdOn;
 
     public function __construct()
     {
@@ -80,9 +80,9 @@ class Request
         $this->details = $details;
         $this->priority = $priority;
         $this->person_id = $personId;
-        $this->public = $isPublic;
-        $this->answered = false;
-        $this->deleted = false;
-        $this->created_on = new DateTime('now', new DateTimeZone('UTC'));
+        $this->isPublic = $isPublic;
+        $this->isAnswered = false;
+        $this->isDeleted = false;
+        $this->createdOn = new DateTime('now', new DateTimeZone('UTC'));
     }
 }
