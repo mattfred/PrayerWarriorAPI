@@ -15,10 +15,6 @@ $app->get('/', function ($request, $response) {
     return $this->view->render($response, 'index.html');
 });
 
-$app->map('/:x+', function($x) {
-    http_response_code(200);
-})->via('OPTIONS');
-
 $app->get('/index', function ($request, $response) {
     return $this->view->render($response, 'index.html');
 });
