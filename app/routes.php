@@ -65,13 +65,13 @@ $app->post('/login', function (Request $request, Response $response) {
             $authToken->init($person->id);
             $mapper = new AuthTokenMapper($this->db);
             $mapper->saveAuthToken($authToken);
-            return $response->withHeader('Access-Control-Allow-Headers', 'Content-Type')->withStatus(200)->
+            return $response->withStatus(200)->
             withHeader('Content-Type', 'application/json')->withJson($authToken);
         } else {
-            return $response->withHeader('Access-Control-Allow-Headers', 'Content-Type')->withStatus(401);
+            return $response->withStatus(401);
         }
     } else {
-        return $response->withHeader('Access-Control-Allow-Headers', 'Content-Type')->withStatus(404);
+        return $response->withStatus(404);
     }
 });
 
