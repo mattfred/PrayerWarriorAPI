@@ -3,3 +3,5 @@ RewriteEngine on
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^ index.php [QSA,L]
+Access-Control-Allow-Headers:X-HTTP-Method-Override, Content-Type, Authorization, x-requested-with
+Access-Control-Allow-Methods:GET, POST, PUT, DELETE
