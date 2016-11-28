@@ -8,7 +8,7 @@
  *
  * Prayer request object
  */
-class Request
+class PrayerRequest
 {
     const PRIORITY_NONE = 0;
     const PRIORITY_LOW = 1;
@@ -64,25 +64,36 @@ class Request
     {
     }
 
-    /**
-     * Request init.
-     *
-     * @param $title string
-     * @param $details string
-     * @param $priority int
-     * @param $personId string
-     * @param $isPublic bool
-     */
-    public function init($title, $details, $priority, $personId, $isPublic)
+
+    public function init(array $array)
     {
-        $this->id = uniqid();
-        $this->title = $title;
-        $this->details = $details;
-        $this->priority = $priority;
-        $this->person_id = $personId;
-        $this->isPublic = $isPublic;
-        $this->isAnswered = false;
-        $this->isDeleted = false;
-        $this->createdOn = new DateTime('now', new DateTimeZone('UTC'));
+        if ($array['id']) {
+            $this->id = $array['id'];
+        } else {
+            $this->id = uniqid();
+        }
+
+        $this->title = $array['title'];
+        $this->details = $array['details'];
+        $this->priority = $array['priority'];
+        $this->isPublic = $array['isPublic'];
+
+        if ($array['isAnswered']) {
+            $this->isAnswered = $array['isAnswered'];
+        } else {
+            $this->isAnswered = false;
+        }
+
+        if ($array['isDeleted']) {
+            $this->isDeleted = $array['isDeleted'];
+        } else {
+            $this->isDeleted = false;
+        }
+
+        if ($array['createdOn']) {
+            $this->createdOn = $array['createdOn'];
+        } else {
+            $this->createdOn = new DateTime('now', new DateTimeZone('UTC'));
+        }
     }
 }

@@ -18,8 +18,16 @@ class RequestMapper extends Mapper
     public function saveRequest($request) {
         $query = $this->db->prepare("INSERT INTO request VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
         $success = $query->execute(array($request->id, $request->title, $request->details, $request->priority,
-            $request->personId, $request->isPublic, $request->isAnswered, $request->isDeleted,
+            $request->person_id, $request->isPublic, $request->isAnswered, $request->isDeleted,
             $request->createdOn->format(Mapper::DATE_FORMAT)));
+        return $success;
+    }
+
+    public function updateRequest($request) {
+        $query = $this->db->prepare("UPDATE request SET title = ?, details = ?, priority = ?, isPublic = ?, isDeleted = ?,
+          isAnswered = ? WHERE id = ?");
+        $success = $query->execute(array($request->title, $request->details, $request->priority, $request->isPublic,
+            $request->isDeleted, $request->isAnswered, $request->id));
         return $success;
     }
 }

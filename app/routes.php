@@ -83,3 +83,24 @@ $app->get('/requests', function (Request $request, Response $response) {
     return $response->withHeader('Content-Type', 'application/json')
         ->withJson($mapper->getRequestByPersonId($authToken->person_id));
 });
+
+$app->post('/saveRequest', function (Request $request, Response $response) {
+    $auth = new Auth();
+    $authToken = $auth->authorize($request, $this->db);
+    if ($authToken == null) return $response->withStatus(401);
+
+    $body = $request->getParsedBody();
+    $update = ($body['id']);
+    $prayerRequest = new PrayerRequest();
+    $prayerRequest->init($body);
+    $prayerRequest->person_id = $authToken->person_id;
+    $mapper = new RequestMapper($this->db);
+
+    if ($update) {
+        $success = $mapper->updateRequest($prayerRequest);
+    } else {
+        $success = $mapper->saveRequest($prayerRequest);
+    }
+
+    return $response->withStatus(200)->withJson($success);
+});
