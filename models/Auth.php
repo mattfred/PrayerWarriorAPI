@@ -18,7 +18,7 @@ class Auth
     {
         $header = $request->getHeader('Authorization');
         $header = array_values($header)[0];
-        if ($header == null) return null;
+        if (!$header) return null;
         $mapper = new AuthTokenMapper($db);
         $authToken = $mapper->getAuthToken($header);
         if ($authToken == null) return null;

@@ -79,6 +79,7 @@ $app->get('/requests', function (Request $request, Response $response) {
     $auth = new Auth();
     $authToken = $auth->authorize($request, $this->db);
     if ($authToken == null) return $response->withStatus(401);
+
     $mapper = new RequestMapper($this->db);
     return $response->withHeader('Content-Type', 'application/json')
         ->withJson($mapper->getRequestByPersonId($authToken->person_id));
@@ -102,5 +103,34 @@ $app->post('/saveRequest', function (Request $request, Response $response) {
         $success = $mapper->saveRequest($prayerRequest);
     }
 
-    return $response->withStatus(200)->withJson($success);
+    if ($success) {
+        return $response->withStatus(204);
+    } else {
+        return $response->withStatus(500);
+    }
+});
+
+$app->post('/answerRequest', function (Request $request, Response $response) {
+    $auth = new Auth();
+    $authToken = $auth->authorize($request, $this->db);
+    if ($authToken == null) return $response->withStatus(401);
+
+    $body = $request->getParsedBody();
+    $update = ($body['id']);
+    $answer = new Answer();
+    $answer->init($body);
+    $mapper = new AnswerMapper($this->db);
+    if ($update) {
+        $success = $mapper->updateAnswer($answer);
+    } else {
+        $success = $mapper->saveAnswer($answer);
+        $mapper = new RequestMapper($this->db);
+        $mapper->markAsAnswered($answer->requestId);
+    }
+
+    if ($success) {
+        return $response->withStatus(204);
+    } else {
+        return $response->withStatus(500);
+    }
 });

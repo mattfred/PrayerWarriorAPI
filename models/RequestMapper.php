@@ -30,4 +30,11 @@ class RequestMapper extends Mapper
             $request->isDeleted, $request->isAnswered, $request->id));
         return $success;
     }
+
+    public function markAsAnswered($id)
+    {
+        $query = $this->db->prepare("UPDATE request SET isAnswered = TRUE WHERE id = ?");
+        $success = $query->execute(array($id));
+        return $success;
+    }
 }
